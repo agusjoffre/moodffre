@@ -1,3 +1,4 @@
+'use client'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from './ui/button'
 import { useState } from 'react'
@@ -22,7 +23,7 @@ export default function DescriptionForm ({ setMood }): JSX.Element {
           <Textarea value={description} onChange={(e) => { setDescription(e.target.value) }}
             maxLength={200} placeholder='e.g. My computer freeze & I didn’t sleep well' />
         </div>
-        <Button onClick={handleNextClick}>Next</Button>
+        <Button type='button' onClick={handleNextClick}>Next</Button>
       </section>
   )
 }

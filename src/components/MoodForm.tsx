@@ -13,7 +13,7 @@ export default function MoodForm ({ setMood }): JSX.Element {
           <div>
           {moods.map((moo): JSX.Element => {
             return (
-              <Button onClick={
+              <Button type='button' onClick={
                 () => {
                   setMood((prev: MoodData) => ({
                     ...prev,

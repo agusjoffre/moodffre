@@ -12,10 +12,11 @@ export interface Moods {
 export type Mood = keyof Moods
 
 export interface MoodData {
-  mood: Moods
+  mood: Mood.mood
   activity: string
   description?: string
   date?: Date
+  userID?: string
 }
 
 export type Activity = string

@@ -9,7 +9,6 @@ export default function ActivityForm ({ uniqueActivities, setMood }):
 JSX.Element {
   const [open, setOpen] = useState(false)
   const [newActivity, setNewActivity] = useState('')
-
   const handleClick = (): void => {
     setMood((prev: MoodData) => ({
       ...prev,
@@ -18,7 +17,6 @@ JSX.Element {
     setNewActivity('')
     setOpen(false)
   }
-
   return (
       <section>
         <div>
@@ -26,7 +24,7 @@ JSX.Element {
           <h3>Select one of the following or add a new activity</h3>
         </div>
         <div className='flex gap-2'>
-          {uniqueActivities?.map((activity): JSX.Element => {
+          {uniqueActivities?.map((activity: Activity): JSX.Element => {
             return (
               <Badge onClick={() => {
                 setMood((prev: MoodData) => ({
@@ -38,7 +36,7 @@ JSX.Element {
           })}
         </div>
         <div>
-          <Button onClick={() => { setOpen(!open) }}>+</Button>
+          <Button type='button' onClick={() => { setOpen(!open) }}>+</Button>
           {open && (
             <div>
             <Input
@@ -50,7 +48,6 @@ JSX.Element {
             </div>
           )}
         </div>
-        <Button>Next</Button>
       </section>
   )
 }

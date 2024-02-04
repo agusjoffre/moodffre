@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { type MoodData } from '@/types'
 
-export default function MoodDetails ({ moodData }: { moodData: MoodData | null }): JSX.Element {
+export default function MoodDetails ({ moodData, handleDone }: { moodData: MoodData | null, handleDone: () => void }): JSX.Element {
   return (
     <section>
       <div>
@@ -14,7 +14,6 @@ export default function MoodDetails ({ moodData }: { moodData: MoodData | null }
         {((moodData?.description) != null) && <p>Description: {moodData?.description}</p>}
 
       </div>
-      <Button>Done</Button>
     </section>
   )
 }

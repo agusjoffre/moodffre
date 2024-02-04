@@ -1,6 +1,4 @@
-'use client'
-import { useState } from 'react'
-import { type MoodData } from '@/types'
+import { postMood, getUniqueActivities } from '@/server-actions/queries'
 import MoodForm from './MoodForm'
 import ActivityForm from './ActivityForm'
 import DescriptionForm from './DescriptionForm'
@@ -12,19 +10,34 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import React from 'react'
+import { type Activity, type MoodData } from '@/types'
+import { Button } from './ui/button'
 
-export default function NewMoodPage (): JSX.Element {
-  /* mood es un objeto de tipo Mood */
-  const [mood, setMood] = useState<MoodData | null>(null)
+export default function NewMoodPage ({ setMood, mood, setOpen, uniqueActivities }:
+{
+  setMood: React.Dispatch<React.SetStateAction<MoodData>>
+  mood: MoodData | null
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  uniqueActivities: Activity[]
+}): JSX.Element {
+  const onSubmit = async (event: React.FormEvent): Promise<void> => {
+    event.preventDefault()
+    await postMood(mood)
+    setMood(null)
+    setOpen(false)
+  }
+
   return (
-        <main className='min-h-screen min-w-screen flex flex-col gap-10 items-center'>
+    <main>
+      <form onSubmit={onSubmit} className='min-h-full min-w-full flex flex-col gap-10 items-center'>
       <Carousel className='w-1/2 gap-1'>
         <CarouselContent >
             <CarouselItem>
               <MoodForm setMood={setMood}/>
             </CarouselItem>
             <CarouselItem>
-              <ActivityForm setMood={setMood}/>
+              <ActivityForm uniqueActivities={uniqueActivities} setMood={setMood}/>
           </CarouselItem>
             <CarouselItem>
               <DescriptionForm setMood={setMood}/>
@@ -33,9 +46,11 @@ export default function NewMoodPage (): JSX.Element {
               <MoodDetails moodData={mood}/>
           </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious size='icon'/>
-        <CarouselNext size='icon'/>
-      </Carousel>
+        <CarouselPrevious size='icon' type='button'/>
+        <CarouselNext size='icon'type='button'/>
+        </Carousel>
+        <Button type='submit'>Done</Button>
+        </form>
         </main>
   )
 }
