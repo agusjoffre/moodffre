@@ -1,7 +1,10 @@
+import NewMoodPage from '@/components/NewMoodPage'
+
 export default function Home (): JSX.Element {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className='min-h-screen min-w-screen flex flex-col gap-10 py-10 items-center'>
       <h1>Moodffre app</h1>
+      <NewMoodPage/>
     </main>
   )
 }

@@ -38,6 +38,7 @@ export const getAllActivities = async (): Promise<mongoose.Document[]> => {
   }
 }
 
+// activities without repetition
 export const getUniqueActivities = async (): Promise<mongoose.Document[]> => {
   try {
     await connectDB()
