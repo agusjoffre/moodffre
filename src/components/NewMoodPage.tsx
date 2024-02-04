@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { type Mood } from '@/types'
+import { type MoodData } from '@/types'
 import MoodForm from './MoodForm'
 import ActivityForm from './ActivityForm'
 import DescriptionForm from './DescriptionForm'
@@ -15,22 +15,22 @@ import {
 
 export default function NewMoodPage (): JSX.Element {
   /* mood es un objeto de tipo Mood */
-  const [mood, setMood] = useState<Mood | null>(null)
+  const [mood, setMood] = useState<MoodData | null>(null)
   return (
         <main className='min-h-screen min-w-screen flex flex-col gap-10 items-center'>
       <Carousel className='w-1/2 gap-1'>
         <CarouselContent >
             <CarouselItem>
-              <MoodForm />
+              <MoodForm setMood={setMood}/>
             </CarouselItem>
             <CarouselItem>
-              <ActivityForm />
+              <ActivityForm setMood={setMood}/>
           </CarouselItem>
             <CarouselItem>
-              <DescriptionForm />
+              <DescriptionForm setMood={setMood}/>
           </CarouselItem>
           <CarouselItem>
-              <MoodDetails/>
+              <MoodDetails moodData={mood}/>
           </CarouselItem>
         </CarouselContent>
         <CarouselPrevious size='icon'/>

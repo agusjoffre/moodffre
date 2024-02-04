@@ -1,7 +1,9 @@
+'use client'
 import { moods } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
+import { type Moods, type MoodData, type Mood } from '@/types'
 
-export default function MoodForm (): JSX.Element {
+export default function MoodForm ({ setMood }): JSX.Element {
   return (
     <section>
       <div>
@@ -9,9 +11,16 @@ export default function MoodForm (): JSX.Element {
         <h3>Select one of the following</h3>
       </div>
           <div>
-          {moods.map((mood): JSX.Element => {
+          {moods.map((moo): JSX.Element => {
             return (
-              <Button key={mood.mood}>{mood.emoji} {mood.mood}</Button>
+              <Button onClick={
+                () => {
+                  setMood((prev: MoodData) => ({
+                    ...prev,
+                    mood: moo.mood
+                  }))
+                }
+              } key={moo.mood}>{moo.emoji} {moo.mood}</Button>
             )
           })}
       </div>

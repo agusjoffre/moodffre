@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { type MoodData } from '@/types'
 
-export default function MoodDetails ({ moodData }: { moodData: MoodData }): JSX.Element {
+export default function MoodDetails ({ moodData }: { moodData: MoodData | null }): JSX.Element {
   return (
     <section>
       <div>
@@ -9,9 +9,9 @@ export default function MoodDetails ({ moodData }: { moodData: MoodData }): JSX.
         <h3>Review</h3>
       </div>
           <div>
-          <p>You are feeling: {moodData?.mood}</p>
-              <p>You are: {moodData?.activity}</p>
-        {((moodData?.description) != null) && <p>{moodData?.description}</p>}
+          <p>Mood: {moodData?.mood}</p>
+              <p>Activity: {moodData?.activity}</p>
+        {((moodData?.description) != null) && <p>Description: {moodData?.description}</p>}
 
       </div>
       <Button>Done</Button>
