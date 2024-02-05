@@ -20,3 +20,5 @@ export interface MoodData {
 }
 
 export type Activity = string
+
+export type DateFilter = 'TODAY' | 'WEEK' | 'MONTH' | 'YEAR' | 'ALL'

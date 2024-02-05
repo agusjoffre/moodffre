@@ -1,4 +1,4 @@
-import { type Moods, type Mood } from '@/types'
+import { type Moods, type Mood, type DateFilter } from '@/types'
 
 export const moods: Array<Moods[Mood]> = [
   { mood: 'OVERWHELMED', emoji: '😱' },
@@ -10,3 +10,5 @@ export const moods: Array<Moods[Mood]> = [
   { mood: 'HAPPY', emoji: '😊' },
   { mood: 'VERY_HAPPY', emoji: '😁' }
 ]
+
+export const dateFilters: DateFilter[] = ['TODAY', 'WEEK', 'MONTH', 'YEAR', 'ALL']

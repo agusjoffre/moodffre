@@ -60,7 +60,7 @@ export const getMoodsByActivity = async (activity: Activity): Promise<MoodData[]
   try {
     await connectDB()
     const moods: MoodData[] = await MoodSchema.find({ activity, userID: userId })
-    return moods
+    return await Promise.all(moods)
   } catch (err) {
     const error = err as Error
     console.log(error.message)
@@ -80,7 +80,7 @@ export const getMoodsByDate = async (date: Date): Promise<MoodData[]> => {
   }
 }
 
-export const postMood = async (moodData: MoodData): Promise<MoodData> => {
+export const postMood = async (moodData: MoodData): Promise<void> => {
   try {
     await connectDB()
     const data: MoodData = {
@@ -93,7 +93,7 @@ export const postMood = async (moodData: MoodData): Promise<MoodData> => {
     const newMood = new MoodSchema(data)
     await newMood.save()
     revalidatePath('/')
-    return newMood as MoodData
+    console.log('Mood succesfully sent')
   } catch (err) {
     const error = err as Error
     console.log(error.message)

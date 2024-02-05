@@ -30,7 +30,7 @@ export default function NewMoodPage ({ setMood, mood, setOpen, uniqueActivities 
 
   return (
     <main>
-      <form onSubmit={onSubmit} className='min-h-full min-w-full flex flex-col gap-10 items-center'>
+      <form onSubmit={onSubmit} className='w-full h-full flex flex-col items-center'>
       <Carousel className='w-1/2 gap-1'>
         <CarouselContent >
             <CarouselItem>
