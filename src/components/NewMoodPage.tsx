@@ -1,4 +1,4 @@
-import { postMood, getUniqueActivities } from '@/server-actions/queries'
+import { postMood } from '@/server-actions/queries'
 import MoodForm from './MoodForm'
 import ActivityForm from './ActivityForm'
 import DescriptionForm from './DescriptionForm'

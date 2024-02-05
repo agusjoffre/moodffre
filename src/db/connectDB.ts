@@ -2,13 +2,14 @@
 import mongoose from 'mongoose'
 
 let isConnected: boolean
+const { MONGO_URI } = process.env
 
 const connectDB = async (): Promise<void> => {
   if (isConnected) {
     return
   }
   try {
-    await mongoose.connect('mongodb+srv://controldoblev:mcELAErKX7VgHkSj@cluster0.yididsf.mongodb.net/moodffre?retryWrites=true&w=majority')
+    await mongoose.connect(MONGO_URI!)
     isConnected = true
     console.log('MongoDB connected')
   } catch (err) {

@@ -56,10 +56,10 @@ export const getUniqueActivities = async (): Promise<Activity[]> => {
   }
 }
 
-export const getMoodsByActivity = async (activity: string): Promise<mongoose.Document[]> => {
+export const getMoodsByActivity = async (activity: Activity): Promise<MoodData[]> => {
   try {
     await connectDB()
-    const moods: mongoose.Document[] = await MoodSchema.find({ activity, userID: userId })
+    const moods: MoodData[] = await MoodSchema.find({ activity, userID: userId })
     return moods
   } catch (err) {
     const error = err as Error
@@ -68,10 +68,10 @@ export const getMoodsByActivity = async (activity: string): Promise<mongoose.Doc
   }
 }
 
-export const getMoodsByDate = async (date: Date): Promise<mongoose.Document[]> => {
+export const getMoodsByDate = async (date: Date): Promise<MoodData[]> => {
   try {
     await connectDB()
-    const moods: mongoose.Document[] = await MoodSchema.find({ date, userID: userId })
+    const moods: MoodData[] = await MoodSchema.find({ date, userID: userId })
     return moods
   } catch (err) {
     const error = err as Error
@@ -80,7 +80,7 @@ export const getMoodsByDate = async (date: Date): Promise<mongoose.Document[]> =
   }
 }
 
-export const postMood = async (moodData: MoodData): Promise<mongoose.Document> => {
+export const postMood = async (moodData: MoodData): Promise<MoodData> => {
   try {
     await connectDB()
     const data: MoodData = {
@@ -92,9 +92,8 @@ export const postMood = async (moodData: MoodData): Promise<mongoose.Document> =
     }
     const newMood = new MoodSchema(data)
     await newMood.save()
-    console.log(newMood)
     revalidatePath('/')
-    return newMood
+    return newMood as MoodData
   } catch (err) {
     const error = err as Error
     console.log(error.message)
