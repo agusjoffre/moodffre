@@ -1,10 +1,9 @@
-import { type Activity } from '@/types'
-import RadarChart from './RadarChart'
+import Chart from './RadarChart'
 
-export default function StatisticsPage (): JSX.Element {
+export default function StatisticsPage ({ uniqueActivities }): JSX.Element {
   return (
-        <section>
-          <RadarChart/>
-        </section>
+    <section>
+          <Chart uniqueActivities={uniqueActivities}/>
+    </section>
   )
 }

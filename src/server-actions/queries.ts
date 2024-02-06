@@ -2,15 +2,15 @@
 import type mongoose from 'mongoose'
 import MoodSchema from '@/db/models/MoodSchema'
 import connectDB from '@/db/connectDB'
-import { type Activity, type MoodData } from '@/types'
+import { type Mood, type Activity, type MoodData } from '@/types'
 import { auth } from '@clerk/nextjs'
 import { revalidatePath } from 'next/cache'
 
 const { userId } = auth()
-export const getAllMoods = async (): Promise<mongoose.Document[]> => {
+export const getAllMoods = async (): Promise<MoodData[]> => {
   try {
     await connectDB()
-    const moods: mongoose.Document[] = await MoodSchema.find({ userID: userId })
+    const moods: MoodData[] = await MoodSchema.find({ userID: userId })
     return moods
   } catch (err) {
     const error = err as Error
@@ -73,6 +73,31 @@ export const getMoodsByDate = async (date: Date): Promise<MoodData[]> => {
     await connectDB()
     const moods: MoodData[] = await MoodSchema.find({ date, userID: userId })
     return moods
+  } catch (err) {
+    const error = err as Error
+    console.log(error.message)
+    throw new Error(error.message)
+  }
+}
+
+export const getEmotionByActivity = async (activity: Activity): Promise<string[] | undefined> => {
+  try {
+    if (activity.length === 0) return
+    await connectDB()
+    const moodCount = await MoodSchema.find({ activity, userID: userId }).select('mood')
+    return moodCount
+  } catch (err) {
+    const error = err as Error
+    console.log(error.message)
+    throw new Error(error.message)
+  }
+}
+
+export const getActivitiesByMood = async (mood: Mood): Promise<Mood[]> => {
+  try {
+    await connectDB()
+    const activities = await MoodSchema.find({ mood, userID: userId }).distinct('activity')
+    return activities
   } catch (err) {
     const error = err as Error
     console.log(error.message)
